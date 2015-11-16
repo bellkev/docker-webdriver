@@ -1,9 +1,12 @@
 machine:
+  python:
+    version: 2.7.9
   services:
     - docker
 dependencies:
   override:
     - curl -L https://github.com/docker/compose/releases/download/1.5.0/docker-compose-`uname -s`-`uname -m` > ../bin/docker-compose && chmod +x ../bin/docker-compose
+    - pip install selenium
     - ../bin/docker-compose up:
         background: true
 test:
