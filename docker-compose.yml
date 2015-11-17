@@ -9,7 +9,7 @@ nginx:
   ports:
     - "8000:8000"
 chromedriver:
-  image: robcherry/docker-chromedriver:latest
+  build: docker-chromedriver
   links:
     - nginx
   ports:
