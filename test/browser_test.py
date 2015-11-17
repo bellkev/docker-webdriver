@@ -8,7 +8,9 @@ driver = webdriver.Remote(
     command_executor="http://localhost:4444"
 )
 driver.get('http://nginx:8000')
-alert_text = Alert(driver).text
-print alert_text
-assert 'Hello' in alert_text
+alert = Alert(driver)
+print alert.text
+assert 'Hello' in alert.text
+alert.accept()
+driver.get_screenshot_as_file('screenshot.png')
 driver.quit()
