@@ -6,13 +6,13 @@ machine:
 dependencies:
   override:
     - curl -L https://github.com/docker/compose/releases/download/1.5.0/docker-compose-`uname -s`-`uname -m` > ../bin/docker-compose && chmod +x ../bin/docker-compose
-    - pip install selenium
+    - pip install -r test/requirements.txt
     - docker-compose build
     - docker-compose pull
     - docker-compose up:
         background: true
-    - sleep 30
+    - curl --retry 10 --retry-delay 5 "http://$DOCKER_IP:4444"
 test:
   override:
-    - python test/browser_test.py
+    - nosetests
     - cp screenshot.png $CIRCLE_ARTIFACTS
