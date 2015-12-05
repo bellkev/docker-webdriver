@@ -5,12 +5,13 @@ dependencies:
   override:
     - curl -L https://github.com/docker/compose/releases/download/1.5.0/docker-compose-`uname -s`-`uname -m` > ../bin/docker-compose && chmod +x ../bin/docker-compose
     - pip install -r test/requirements.txt
+test:
+  override:
     - docker-compose build
     - docker-compose pull
     - docker-compose up:
         background: true
-    - curl --retry 10 --retry-delay 5 "http://$DOCKER_IP:4444"
-test:
-  override:
     - nosetests
     - cp screenshot.png $CIRCLE_ARTIFACTS
+    - docker-compose stop
+    - docker-compose rm -f
