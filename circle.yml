@@ -11,6 +11,7 @@ test:
     - docker-compose pull
     - docker-compose up:
         background: true
+    - ./wait-for-stack.sh
     - nosetests
     - cp screenshot.png $CIRCLE_ARTIFACTS
     - docker-compose stop
