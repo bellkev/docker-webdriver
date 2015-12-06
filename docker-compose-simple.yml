@@ -1,0 +1,10 @@
+uwsgi:
+  build: uwsgi
+nginx:
+  build: nginx
+  links:
+    - uwsgi
+  expose:
+    - 8000
+  ports:
+    - "8000:8000"
